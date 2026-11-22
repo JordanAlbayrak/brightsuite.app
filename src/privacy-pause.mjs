@@ -8,9 +8,9 @@ const HISTORY = "https://github.com/JordanAlbayrak/BrightPause/commits/main/PRIV
 export const pausePrivacy = {
   en: {
     title: "BrightPause privacy policy",
-    description: "BrightPause collects nothing about you and sends nothing anywhere. What stays on your PC, and the one network check.",
-    body: `${head("BrightPause privacy policy", "Last updated 19 November 2026")}
-  <p class="summary">BrightPause is a break reminder for Windows. It collects nothing about you and sends nothing anywhere. This policy covers the Microsoft Store version and the version built from the public source code.</p>
+    description: "BrightPause collects nothing about you and shares nothing with anyone. The Store version makes no network connections at all.",
+    body: `${head("BrightPause privacy policy", "Last updated 22 November 2026")}
+  <p class="summary">BrightPause is a break reminder for Windows. It collects nothing about you and shares nothing with anyone. The Store version makes no network connections at all. This policy covers the Microsoft Store version and the version built from the public source code.</p>
 
   <h2>What stays on your PC</h2>
   <p>BrightPause stores these files on your PC only:</p>
@@ -43,9 +43,9 @@ export const pausePrivacy = {
   },
   fr: {
     title: "Politique de confidentialité de BrightPause",
-    description: "BrightPause ne collecte rien sur vous et n'envoie rien nulle part. Ce qui reste sur votre PC, et la seule vérification réseau.",
-    body: `${head("Politique de confidentialité de BrightPause", "Dernière mise à jour : 19 novembre 2026")}
-  <p class="summary">BrightPause est un rappel de pause pour Windows. Il ne collecte rien sur vous et n'envoie rien nulle part. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.</p>
+    description: "BrightPause ne collecte rien sur vous et ne partage rien avec personne. La version du Store ne se connecte à aucun réseau.",
+    body: `${head("Politique de confidentialité de BrightPause", "Dernière mise à jour : 22 novembre 2026")}
+  <p class="summary">BrightPause est un rappel de pause pour Windows. Il ne collecte rien sur vous et ne partage rien avec personne. La version du Store ne se connecte à aucun réseau. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.</p>
 
   <h2>Ce qui reste sur votre PC</h2>
   <p>BrightPause enregistre ces fichiers sur votre PC seulement :</p>
