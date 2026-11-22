@@ -19,15 +19,15 @@ const icons = {
 
 const t = {
   en: {
-    title: "BrightSuite: calm, light apps",
-    description: "BrightSuite makes small apps that do one thing well, stay out of your way and are plain about your data: BrightPause and BrightQueue.",
+    title: "BrightSuite: free apps for body and mind",
+    description: "Free apps for body and mind: BrightPause and BrightQueue.",
     h1: "Log off better than you logged on.",
-    lead: "Free little apps that make screen time a little better for your body and mind.",
+    lead: "Free apps that make screen time lighter on your body and mind.",
     seeApps: "See the apps",
-    get: STORE_LIVE ? "Get it from Microsoft" : "Coming to the Microsoft Store",
+    get: STORE_LIVE ? "Get it from Microsoft Store" : "Coming to the Microsoft Store",
     stageAlt: "BrightPause settings on a Windows desktop, its heads-up notice in the corner with Snooze and Skip, and a BrightQueue lesson on a phone.",
     appsH: "The apps",
-    appsLead: "Two so far, each with its own plain-words privacy page.",
+    appsLead: "Two so far.",
     more: "How it works",
     privacy: "Privacy",
     pause: {
@@ -42,7 +42,7 @@ const t = {
       dlgDone: "Nice. Your eyes say thank you.",
       dlgClose: "Back to the page",
       features: [
-        ["headsup", "A heads-up, never a surprise", "Ten seconds before a break (thirty before a movement break), a small notice appears in the corner with Snooze and Skip. It never takes the keyboard focus, so you can finish your sentence.", "The BrightPause heads-up notice: \"Short break in 9 seconds\", with Snooze 2 min and Skip buttons."],
+        ["headsup", "A heads-up, never a surprise", "Ten seconds before a break (thirty before a movement break), a small notice appears in the corner with Snooze and Skip. It never interrupts your typing, so you can finish your sentence.", "The BrightPause heads-up notice: \"Short break in 9 seconds\", with Snooze 2 min and Skip buttons."],
         ["break", "Rest your eyes, then move", "Every 20 minutes a calm 20-second break covers your screens: look far away, blink, roll your shoulders. Every third break is a 5-minute movement break. Each one shows a short message, a tip with its source, or a small challenge.", "A BrightPause eye break: \"Look far away\", with a 20-second countdown, a source link, and Postpone and Skip buttons."],
         ["settings", "Stays out of your way", "Breaks wait while another app uses your microphone for a call, or while a game, a video or another app is full screen. Five minutes away from the keyboard counts as a break. No account, no network, and your settings stay on your PC.", "BrightPause settings: breaks taken today, a week of counts, pause buttons and the break timing options."],
       ],
@@ -57,7 +57,7 @@ const t = {
       facts: ["Octopuses have three hearts.", "A day on Venus is longer than its year.", "Botanically, bananas are berries and strawberries are not.", "Honey can stay edible for thousands of years."],
       features: [
         ["home", "Pick a topic", "Math, science, history, space, philosophy and more. Pick one and get a short lesson, with no feed to scroll and no ads.", "BrightQueue's home page: \"What do you want to learn today?\" above a grid of topics."],
-        ["lesson", "One short lesson at a time", "Each lesson takes a few minutes to read and ends with a fun fact. Sign in and it can read the lesson aloud.", "A BrightQueue lesson titled \"Why the sky is blue\", with a Listen button."],
+        ["lesson", "One short lesson at a time", "Each lesson ends with a fun fact. Signing in is optional and adds read-aloud.", "A BrightQueue lesson titled \"Why the sky is blue\", with a Listen button."],
         ["quiz", "Then check what stuck", "A short quiz on the lesson you just read, in normal or hard mode, with an explanation for each answer. Send a friend a challenge link to compare scores.", "A BrightQueue quiz on the sky lesson, with four answers per question."],
       ],
       note: "Screenshots use demo lessons.",
@@ -65,21 +65,21 @@ const t = {
     prinH: "Made the same way",
     prinLead: "A few rules every Bright app follows.",
     prin: [
-      ["light", "Light", "Small downloads and little memory. BrightPause runs one small process between breaks and installs in about 2 MB."],
+      ["light", "Light", "Small and quick. Nothing heavy to install, nothing running for no reason."],
       ["calm", "Calm", "No pop-ups that grab your keyboard, no ads, nothing that asks for more of your time than the task needs."],
-      ["plain", "Plain about data", "Every app has a privacy page written from what its code actually does, in plain words."],
+      ["plain", "Plain about data", "Each app tells you in plain words what it does with your data."],
     ],
   },
   fr: {
-    title: "BrightSuite : des apps légères et tranquilles",
-    description: "BrightSuite crée de petites apps qui font une seule chose bien, restent discrètes et disent clairement ce qu'elles font de vos données : BrightPause et BrightQueue.",
+    title: "BrightSuite : des apps gratuites pour le corps et l'esprit",
+    description: "Des apps gratuites pour le corps et l'esprit : BrightPause et BrightQueue.",
     h1: "Quittez l'écran en meilleure forme qu'en arrivant.",
-    lead: "De petites apps gratuites pour un temps d'écran un peu meilleur, pour le corps comme pour la tête.",
+    lead: "Des apps gratuites qui allègent le temps d'écran pour le corps et l'esprit.",
     seeApps: "Voir les apps",
-    get: STORE_LIVE ? "Obtenir sur Microsoft Store" : "Bientôt sur Microsoft Store",
+    get: STORE_LIVE ? "Obtenir du Microsoft Store" : "Bientôt sur Microsoft Store",
     stageAlt: "Les réglages de BrightPause sur un bureau Windows, son avis dans le coin avec les boutons Reporter et Ignorer, et une leçon de BrightQueue sur un téléphone.",
     appsH: "Les apps",
-    appsLead: "Deux pour l'instant, chacune avec sa page de confidentialité en mots simples.",
+    appsLead: "Deux pour l'instant.",
     more: "Comment ça marche",
     privacy: "Confidentialité",
     pause: {
@@ -94,7 +94,7 @@ const t = {
       dlgDone: "Bravo. Vos yeux vous disent merci.",
       dlgClose: "Retour à la page",
       features: [
-        ["headsup", "Un avis, jamais une surprise", "Dix secondes avant une pause (trente avant une pause active), un petit avis apparaît dans le coin avec Reporter et Ignorer. Il ne prend jamais le focus du clavier : vous pouvez finir votre phrase.", "L'avis de BrightPause avant une pause, avec les boutons Reporter et Ignorer (capture en anglais)."],
+        ["headsup", "Un avis, jamais une surprise", "Dix secondes avant une pause (trente avant une pause active), un petit avis apparaît dans le coin avec Reporter et Ignorer. Il n'interrompt jamais votre frappe : vous pouvez finir votre phrase.", "L'avis de BrightPause avant une pause, avec les boutons Reporter et Ignorer (capture en anglais)."],
         ["break", "Reposer les yeux, puis bouger", "Toutes les 20 minutes, une pause calme de 20 secondes couvre vos écrans : regarder au loin, cligner des yeux, rouler les épaules. Une pause sur trois est une pause active de 5 minutes. Chacune affiche un court message, un conseil avec sa source ou un petit défi.", "Une pause visuelle de BrightPause : « Regardez au loin », avec un compte à rebours de 20 secondes, un lien vers la source, et les boutons Reporter et Ignorer."],
         ["settings", "Reste discret", "Les pauses attendent quand une autre app utilise votre micro pour un appel, ou quand un jeu, une vidéo ou une autre app est en plein écran. Cinq minutes loin du clavier comptent comme une pause. Pas de compte, aucun accès réseau, et vos réglages restent sur votre PC.", "Les réglages de BrightPause : les pauses prises aujourd'hui, le compte de la semaine, les boutons de mise en pause et le rythme des pauses."],
       ],
@@ -109,7 +109,7 @@ const t = {
       facts: ["Les pieuvres ont trois cœurs.", "Sur Vénus, un jour dure plus longtemps qu'une année.", "En botanique, la banane est une baie, mais pas la fraise.", "Le miel peut rester comestible pendant des milliers d'années."],
       features: [
         ["home", "Choisir un sujet", "Maths, sciences, histoire, espace, philosophie et plus encore. Choisissez-en un et recevez une courte leçon, sans fil d'actualité ni pub.", "L'accueil de BrightQueue : « What do you want to learn today? » au-dessus d'une grille de sujets."],
-        ["lesson", "Une courte leçon à la fois", "Chaque leçon se lit en quelques minutes et se termine par un fait amusant. Une fois connecté, l'app peut la lire à voix haute.", "Une leçon de BrightQueue intitulée « Why the sky is blue », avec un bouton Listen."],
+        ["lesson", "Une courte leçon à la fois", "Chaque leçon se termine par un fait amusant. La connexion est facultative et ajoute la lecture à voix haute.", "Une leçon de BrightQueue intitulée « Why the sky is blue », avec un bouton Listen."],
         ["quiz", "Puis vérifier ce qui est resté", "Un court quiz sur la leçon que vous venez de lire, en mode normal ou difficile, avec une explication pour chaque réponse. Envoyez un lien de défi à un ami pour comparer vos scores.", "Un quiz de BrightQueue sur la leçon du ciel, avec quatre réponses par question."],
       ],
       note: "Captures avec des leçons de démonstration. L'app est en anglais pour l'instant.",
@@ -117,9 +117,9 @@ const t = {
     prinH: "Conçues de la même façon",
     prinLead: "Quelques règles que suit chaque app Bright.",
     prin: [
-      ["light", "Légères", "Des téléchargements petits et peu de mémoire. Entre deux pauses, BrightPause ne fait tourner qu'un petit processus, et s'installe en 2 Mo environ."],
+      ["light", "Légères", "Petites et rapides. Rien de lourd à installer, rien qui tourne pour rien."],
       ["calm", "Tranquilles", "Pas de fenêtre qui vole le clavier, pas de pub, rien qui demande plus de temps que la tâche n'en a besoin."],
-      ["plain", "Claires sur les données", "Chaque app a une page de confidentialité écrite à partir de ce que fait vraiment son code, en mots simples."],
+      ["plain", "Claires sur les données", "Chaque app dit en mots simples ce qu'elle fait de vos données."],
     ],
   },
 };
@@ -158,7 +158,6 @@ function home(lang) {
   <p class="lead">${s.lead}</p>
   <div class="actions">
     <a class="btn btn-primary" href="#apps">${s.seeApps}</a>
-    <a class="btn btn-ghost" href="${PAUSE_GET}">${s.get}</a>
   </div>
   <div class="stage" role="img" aria-label="${s.stageAlt}">
     <div class="desk">
@@ -196,7 +195,7 @@ function home(lang) {
 </div></section>
 
 <section class="section app-section" id="brightpause" aria-labelledby="bp-h"><div class="wrap">
-  <div class="section-head"><img src="/assets/logo/brightpause.svg" alt="" width="64" height="64"><h2 id="bp-h">BrightPause</h2><p>${s.pause.pitch} <span class="ver">${s.pause.version}</span></p>
+  <div class="section-head"><img src="/assets/logo/brightpause.svg" alt="" width="64" height="64"><h2 id="bp-h">BrightPause</h2>
     <button class="btn btn-ghost try" type="button" data-break hidden>${s.pause.tryIt}</button></div>
   <dialog class="breakdlg" aria-labelledby="dlg-h">
     <p class="dlg-kicker">${s.pause.dlgKicker}</p>
@@ -209,7 +208,7 @@ function home(lang) {
 </div></section>
 
 <section class="section app-section band" id="brightqueue" aria-labelledby="bq-h"><div class="wrap">
-  <div class="section-head"><img src="/assets/logo/brightqueue.svg" alt="" width="64" height="64"><h2 id="bq-h">BrightQueue</h2><p>${s.queue.pitch}</p>
+  <div class="section-head"><img src="/assets/logo/brightqueue.svg" alt="" width="64" height="64"><h2 id="bq-h">BrightQueue</h2>
     <div class="fact" data-facts="${s.queue.facts.join("|")}"><span class="fact-label">${s.queue.factLabel}</span><p class="fact-text" aria-live="polite">${s.queue.facts[0]}</p><button class="fact-next" type="button" hidden>${s.queue.factNext}</button></div></div>
   ${s.queue.features.map(([k, h, p, alt], i) => feature(i, h, p, `<div class="frame tall">${themed(k, alt, FEAT_SIZES)}</div>`)).join("")}
   <p class="caption">${s.queue.note}</p>
@@ -226,8 +225,9 @@ function home(lang) {
 const notFound = `
 <section class="notfound"><div class="wrap">
   <h1>Page not found</h1>
-  <p>This page does not exist. <a href="/">Go to the home page</a>.</p>
-  <p lang="fr">Cette page n'existe pas. <a href="/fr/">Aller à l'accueil</a>.</p>
+  <p><a href="/">Go to the home page</a></p>
+  <h1 lang="fr">Page introuvable</h1>
+  <p lang="fr"><a href="/fr/">Aller à l'accueil</a></p>
 </div></section>`;
 
 export const pages = [
@@ -244,5 +244,5 @@ export const pages = [
     .map(([lang, path, alt, to, name, go]) => ({ lang, path, alt, noindex: true, title: `${name}: BrightSuite`, description: name,
       head: `<meta http-equiv="refresh" content="0; url=${to}">
 `, body: `<section class="notfound"><div class="wrap"><p><a href="${to}">${go}</a></p></div></section>` })),
-  { lang: "en", path: "/404.html", file: "404.html", alt: "/fr/", noindex: true, title: "Page not found: BrightSuite", description: "This page does not exist.", body: notFound },
+  { lang: "en", path: "/404.html", file: "404.html", alt: "/fr/", noindex: true, title: "Page not found: BrightSuite", description: "Page not found.", body: notFound },
 ];

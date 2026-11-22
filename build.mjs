@@ -26,9 +26,9 @@ const csp = [
   "form-action 'none'",
 ].join("; ");
 
-// French typography: narrow no-break space before : ; ? ! in text nodes only.
-const frText = (html) =>
-  html.replace(/>([^<]+)</g, (_, t) => ">" + t.replace(/ ([:;?!»])/g, " $1").replace(/« /g, "« ") + "<");
+// French typography (Quebec): no-break space before : and inside « », no space before ; ? !
+const frType = (t) => t.replace(/ :/g, " :").replace(/ ([;?!])/g, "$1").replace(/« /g, "« ").replace(/ »/g, " »");
+const frText = (html) => html.replace(/>([^<]+)</g, (_, t) => ">" + frType(t) + "<");
 
 const ui = {
   en: { skip: "Skip to content", apps: "Apps", theme: "Switch light or dark theme", other: "Français", otherShort: "FR", home: "BrightSuite home" },
@@ -37,12 +37,12 @@ const ui = {
 
 const foot = {
   en: `<footer class="foot"><div class="wrap">
-  <div><p><strong>BrightSuite</strong></p><p>Small, calm apps. This site sets no cookies and loads nothing from other sites.</p><p>&copy; 2026 BrightSuite</p></div>
+  <div><p><strong>BrightSuite</strong></p><p>Free apps for body and mind. This site sets no cookies and loads nothing from other sites.</p><p>&copy; 2026 BrightSuite</p></div>
   <div><h2>Apps</h2><ul><li><a href="/#brightpause">BrightPause</a></li><li><a href="/#brightqueue">BrightQueue</a></li></ul></div>
   <div><h2>Privacy</h2><ul><li><a href="/pause/privacy/">BrightPause privacy</a></li>${QUEUE_PRIVACY_PUBLIC ? `<li><a href="/queue/privacy/">BrightQueue privacy</a></li>` : ""}</ul></div>
 </div></footer>`,
   fr: `<footer class="foot"><div class="wrap">
-  <div><p><strong>BrightSuite</strong></p><p>De petites apps tranquilles. Ce site ne dépose aucun cookie et ne charge rien depuis d'autres sites.</p><p>&copy; 2026 BrightSuite</p></div>
+  <div><p><strong>BrightSuite</strong></p><p>Des apps gratuites pour le corps et l'esprit. Ce site ne dépose aucun cookie et ne charge rien depuis d'autres sites.</p><p>&copy; 2026 BrightSuite</p></div>
   <div><h2>Apps</h2><ul><li><a href="/fr/#brightpause">BrightPause</a></li><li><a href="/fr/#brightqueue">BrightQueue</a></li></ul></div>
   <div><h2>Confidentialité</h2><ul><li><a href="/fr/pause/privacy/">Confidentialité de BrightPause</a></li>${QUEUE_PRIVACY_PUBLIC ? `<li><a href="/fr/queue/privacy/">Confidentialité de BrightQueue</a></li>` : ""}</ul></div>
 </div></footer>`,
@@ -66,8 +66,8 @@ function layout(p) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="${csp}">
 <meta name="referrer" content="no-referrer">
-<title>${p.title}</title>
-<meta name="description" content="${p.description}">
+<title>${p.lang === "fr" ? frType(p.title) : p.title}</title>
+<meta name="description" content="${p.lang === "fr" ? frType(p.description) : p.description}">
 ${p.head ?? ""}${p.noindex ? '<meta name="robots" content="noindex">\n' : ""}<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1513" media="(prefers-color-scheme: dark)">

@@ -8,9 +8,9 @@ const HISTORY = "https://github.com/JordanAlbayrak/BrightPause/commits/main/PRIV
 export const pausePrivacy = {
   en: {
     title: "BrightPause privacy policy",
-    description: "BrightPause collects nothing about you and shares nothing with anyone. The Store version makes no network connections at all.",
+    description: "BrightPause collects nothing about you and shares nothing with anyone. The Microsoft Store version makes no network connections at all.",
     body: `${head("BrightPause privacy policy", "Last updated 22 November 2026")}
-  <p class="summary">BrightPause is a break reminder for Windows. It collects nothing about you and shares nothing with anyone. The Store version makes no network connections at all. This policy covers the Microsoft Store version and the version built from the public source code.</p>
+  <p class="summary">BrightPause is a break reminder for Windows. It collects nothing about you and shares nothing with anyone. The Microsoft Store version makes no network connections at all. This policy covers the Microsoft Store version and the version built from the public source code.</p>
 
   <h2>What stays on your PC</h2>
   <p>BrightPause stores these files on your PC only:</p>
@@ -43,15 +43,15 @@ export const pausePrivacy = {
   },
   fr: {
     title: "Politique de confidentialité de BrightPause",
-    description: "BrightPause ne collecte rien sur vous et ne partage rien avec personne. La version du Store ne se connecte à aucun réseau.",
+    description: "BrightPause ne collecte rien sur vous et ne partage rien avec personne. La version du Microsoft Store ne se connecte à aucun réseau.",
     body: `${head("Politique de confidentialité de BrightPause", "Dernière mise à jour : 22 novembre 2026")}
-  <p class="summary">BrightPause est un rappel de pause pour Windows. Il ne collecte rien sur vous et ne partage rien avec personne. La version du Store ne se connecte à aucun réseau. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.</p>
+  <p class="summary">BrightPause est un rappel de pause pour Windows. Il ne collecte rien sur vous et ne partage rien avec personne. La version du Microsoft Store ne se connecte à aucun réseau. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.</p>
 
   <h2>Ce qui reste sur votre PC</h2>
-  <p>BrightPause enregistre ces fichiers sur votre PC seulement :</p>
+  <p>BrightPause conserve ces fichiers uniquement sur votre PC :</p>
   <ul>
     <li><code>settings.json</code> : vos choix (rythme des pauses, son, thème, langue, raccourcis).</li>
-    <li><code>history.jsonl</code> : une ligne par pause, avec son heure, son type et si vous l'avez prise, reportée ou ignorée. Elle alimente les comptes du jour et de la semaine dans les réglages.</li>
+    <li><code>history.jsonl</code> : une ligne par pause, avec son heure, son type et si vous l'avez prise, reportée ou ignorée. Ce fichier alimente les totaux du jour et de la semaine dans les réglages.</li>
     <li><code>events.log</code> : une ligne chaque fois qu'une pause commence, attend ou se termine, avec la raison (par exemple une app en plein écran, et le nom de fichier de cette app). Il aide à expliquer une pause manquée ou en retard. Il reste sur votre PC, et BrightPause le garde sous 0,5 Mo environ.</li>
     <li>Votre image de fond, si vous en choisissez une.</li>
   </ul>
