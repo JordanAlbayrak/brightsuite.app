@@ -5,7 +5,7 @@ import { queuePrivacy } from "./privacy-queue.mjs";
 export const QUEUE_PRIVACY_PUBLIC = false;
 
 // Flip to true once the Microsoft Store listing has passed certification and is live.
-const STORE_LIVE = false;
+const STORE_LIVE = true;
 const STORE = "https://apps.microsoft.com/detail/9N9B4C21TLDL";
 const PAUSE_GH = "https://github.com/JordanAlbayrak/BrightPause";
 const QUEUE_WEB = "https://brightqueue.vercel.app";
