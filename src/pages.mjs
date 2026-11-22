@@ -21,8 +21,8 @@ const t = {
   en: {
     title: "BrightSuite: calm, light apps",
     description: "BrightSuite makes small apps that do one thing well, stay out of your way and are plain about your data: BrightPause and BrightQueue.",
-    h1: "Small apps for brighter screen days.",
-    lead: "BrightSuite makes friendly little apps that do one thing well: nudge you to rest your eyes, teach you something new, and stay out of your way the rest of the time.",
+    h1: "Log off better than you logged on.",
+    lead: "Free apps that help your body and mind, in small but real ways.",
     seeApps: "See the apps",
     get: STORE_LIVE ? "Get it from Microsoft" : "Coming to the Microsoft Store",
     stageAlt: "BrightPause settings on a Windows desktop, its heads-up notice in the corner with Snooze and Skip, and a BrightQueue lesson on a phone.",
@@ -73,8 +73,8 @@ const t = {
   fr: {
     title: "BrightSuite : des apps légères et tranquilles",
     description: "BrightSuite crée de petites apps qui font une seule chose bien, restent discrètes et disent clairement ce qu'elles font de vos données : BrightPause et BrightQueue.",
-    h1: "De petites apps pour des journées d'écran plus lumineuses.",
-    lead: "BrightSuite crée de petites apps sympathiques qui font une seule chose bien : vous rappeler de reposer vos yeux, vous apprendre quelque chose de nouveau, et rester discrètes le reste du temps.",
+    h1: "Quittez l'écran en meilleure forme qu'en arrivant.",
+    lead: "Des apps gratuites qui font du bien au corps et à la tête, à petites doses, mais pour vrai.",
     seeApps: "Voir les apps",
     get: STORE_LIVE ? "Obtenir sur Microsoft Store" : "Bientôt sur Microsoft Store",
     stageAlt: "Les réglages de BrightPause sur un bureau Windows, son avis dans le coin avec les boutons Reporter et Ignorer, et une leçon de BrightQueue sur un téléphone.",

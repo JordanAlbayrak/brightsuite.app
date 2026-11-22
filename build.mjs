@@ -11,7 +11,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync("src/assets", path.join(OUT, "assets"), { recursive: true });
 fs.copyFileSync("src/assets/logo/brightsuite.svg", path.join(OUT, "favicon.svg"));
-fs.writeFileSync(path.join(OUT, "CNAME"), "brightsuite.app\n");
+fs.writeFileSync(path.join(OUT, "CNAME"), "brightsuite.app");
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}})();`;
