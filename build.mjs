@@ -14,7 +14,7 @@ fs.copyFileSync("src/assets/logo/brightsuite.svg", path.join(OUT, "favicon.svg")
 fs.writeFileSync(path.join(OUT, "CNAME"), "brightsuite.app");
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}})();`;
+const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t)}catch(e){}if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("tw-wait")})();`;
 const themeHash = crypto.createHash("sha256").update(themeScript).digest("base64");
 const csp = [
   "default-src 'none'",

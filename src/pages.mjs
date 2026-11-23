@@ -74,7 +74,7 @@ const t = {
     title: "BrightSuite : des apps gratuites pour le corps et l'esprit",
     description: "Des apps gratuites pour le corps et l'esprit : BrightPause et BrightQueue.",
     h1: "Quittez l'écran en meilleure forme qu'en arrivant.",
-    lead: "Des apps gratuites qui allègent le temps d'écran pour le corps et l'esprit.",
+    lead: "Des apps gratuites qui allègent le temps d'écran pour le corps et l'esprit.",
     seeApps: "Voir les apps",
     get: STORE_LIVE ? "Obtenir du Microsoft Store" : "Bientôt sur Microsoft Store",
     stageAlt: "Les réglages de BrightPause sur un bureau Windows, son avis dans le coin avec les boutons Reporter et Ignorer, et une leçon de BrightQueue sur un téléphone.",
@@ -152,9 +152,9 @@ function home(lang) {
   const s = t[lang];
   const pre = lang === "fr" ? "/fr" : "";
   return `
-<section class="hero"><div class="wrap">
-  ${sun("hero-sun")}
-  <h1>${s.h1}</h1>
+<section class="hero"><div class="sky" aria-hidden="true"><i class="shoot s1"></i><i class="shoot s2"></i><i class="shoot s3"></i></div><div class="wrap">
+  ${sun("hero-sun hero-day")}<svg class="hero-sun hero-moon" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#1f6f54"/><circle cx="30" cy="34" r="17" fill="#f4f1ea"/><circle cx="39" cy="27" r="14" fill="#1f6f54"/><circle cx="46" cy="15" r="2" fill="#f4f1ea"/><circle cx="52" cy="26" r="1.4" fill="#f4f1ea"/></svg>
+  <h1 class="tw">${s.h1}</h1>
   <p class="lead">${s.lead}</p>
   <div class="actions">
     <a class="btn btn-primary" href="#apps">${s.seeApps}</a>

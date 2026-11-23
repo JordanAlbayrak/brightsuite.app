@@ -44,6 +44,7 @@ if (isMain) {
       page.on("console", (m) => { if (m.type() === "error") problems.push(`console error on ${page.url()}: ${m.text()}`); });
       for (const [name, url] of pages) {
         await page.goto(`http://127.0.0.1:${PORT}${url}`, { waitUntil: "networkidle" });
+        await page.evaluate(() => new Promise((done) => { const t = () => { const o = document.querySelector(".tw-off"); if (!o || o.textContent === "") setTimeout(done, 1900); else setTimeout(t, 50); }; t(); }));
         await page.evaluate(async () => { for (const img of document.images) { img.loading = "eager"; await img.decode().catch(() => {}); } await document.fonts.ready; await Promise.all(document.getAnimations().filter((x) => x.effect.getTiming().iterations !== Infinity).map((x) => x.finished)); });
         const sw = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
         if (sw[0] > sw[1]) problems.push(`horizontal scroll on ${name} ${vname}: ${sw[0]} > ${sw[1]}`);
