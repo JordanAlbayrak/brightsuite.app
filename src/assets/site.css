@@ -458,13 +458,15 @@ button.btn { font-family: inherit; cursor: pointer; }
   .hero-sun { transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1); }
   .hero-sun:hover { transform: scale(1.08) rotate(-8deg); }
 }
-.hero-moon { display: none; }
+.hero-moon, .night-only { display: none; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .hero-day { display: none; }
-  :root:not([data-theme="light"]) .hero-moon { display: block; }
+  :root:not([data-theme="light"]) .hero-moon, :root:not([data-theme="light"]) .night-only { display: block; }
+  :root:not([data-theme="light"]) .day-only { display: none; }
 }
 :root[data-theme="dark"] .hero-day { display: none; }
-:root[data-theme="dark"] .hero-moon { display: block; }
+:root[data-theme="dark"] .hero-moon, :root[data-theme="dark"] .night-only { display: block; }
+:root[data-theme="dark"] .day-only { display: none; }
 .paused, .paused * , .paused *::before, .paused *::after { animation-play-state: paused !important; }
 @keyframes shoot {
   0% { opacity: 0; transform: rotate(28deg) translateX(0); }

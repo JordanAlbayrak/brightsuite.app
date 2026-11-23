@@ -18,6 +18,39 @@
     label();
   }
 
+  // Theme picker: five element themes, separate from light and dark. Kept in localStorage.
+  var toggle = document.querySelector(".theme");
+  if (toggle) {
+    var fr = root.lang === "fr";
+    var els = [["forest", "Forest", "Forêt"], ["ocean", "Ocean", "Océan"], ["sky", "Sky", "Ciel"], ["space", "Space", "Espace"], ["cave", "Cave", "Caverne"]];
+    var cur = root.getAttribute("data-el") || "forest";
+    var pick = document.createElement("details");
+    pick.className = "el-pick";
+    pick.innerHTML = '<summary aria-label="' + (fr ? "Thème" : "Theme") + '"><span class="el-dot"></span></summary><div class="el-menu" role="menu"></div>';
+    toggle.parentNode.insertBefore(pick, toggle);
+    var dot = pick.querySelector(".el-dot"), menu = pick.querySelector(".el-menu");
+    var sync = function () {
+      dot.setAttribute("data-k", cur);
+      menu.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-checked", b.dataset.el === cur ? "true" : "false"); });
+    };
+    els.forEach(function (e) {
+      var b = document.createElement("button");
+      b.type = "button"; b.dataset.el = e[0]; b.setAttribute("role", "menuitemradio");
+      b.innerHTML = '<span class="el-dot" data-k="' + e[0] + '"></span>' + (fr ? e[2] : e[1]);
+      b.addEventListener("click", function () {
+        cur = e[0];
+        root.setAttribute("data-el", cur);
+        try { localStorage.setItem("el", cur); } catch (x) {}
+        sync();
+        pick.open = false;
+      });
+      menu.appendChild(b);
+    });
+    document.addEventListener("click", function (ev) { if (pick.open && !pick.contains(ev.target)) pick.open = false; });
+    document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && pick.open) { pick.open = false; pick.querySelector("summary").focus(); } });
+    sync();
+  }
+
   // Hero headline types itself once. The full text stays in the heading's aria-label,
   // and the untyped part is only hidden, so the layout never moves.
   var h1 = document.querySelector(".hero h1.tw");

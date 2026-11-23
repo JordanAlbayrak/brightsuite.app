@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { pages, QUEUE_PRIVACY_PUBLIC } from "./src/pages.mjs";
+import { brandCss } from "./src/brand.mjs";
+import { mark } from "./src/sunburst.mjs";
 
 const OUT = "docs";
 const SITE = "https://brightsuite.app";
@@ -10,11 +12,14 @@ const SITE = "https://brightsuite.app";
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 fs.cpSync("src/assets", path.join(OUT, "assets"), { recursive: true });
-fs.copyFileSync("src/assets/logo/brightsuite.svg", path.join(OUT, "favicon.svg"));
+fs.appendFileSync(path.join(OUT, "assets/site.css"), brandCss());
+for (const [app, file] of [["suite", "brightsuite"], ["pause", "brightpause"], ["queue", "brightqueue"]])
+  fs.writeFileSync(path.join(OUT, "assets/logo", file + ".svg"), mark(app));
+fs.writeFileSync(path.join(OUT, "favicon.svg"), mark("suite"));
 fs.writeFileSync(path.join(OUT, "CNAME"), "brightsuite.app");
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 
-const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t)}catch(e){}if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("tw-wait")})();`;
+const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t)}catch(e){}var e;try{e=localStorage.getItem("el")}catch(x){}if(/^(forest|ocean|sky|space|cave)$/.test(e))d.setAttribute("data-el",e);if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("tw-wait")})();`;
 const themeHash = crypto.createHash("sha256").update(themeScript).digest("base64");
 const csp = [
   "default-src 'none'",
@@ -51,7 +56,7 @@ const foot = {
 const sun = `<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg>`;
 const moon = `<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>`;
 
-const brandSun = `<svg class="brand-sun" viewBox="64 64 896 896" width="28" height="28" aria-hidden="true"><rect x="64" y="64" width="896" height="896" rx="220" fill="#1f6f54"/><circle cx="512" cy="512" r="205" fill="none" stroke="#f4f1ea" stroke-width="60"/><circle cx="512" cy="512" r="70" fill="#f4f1ea"/><g class="sun-rays" stroke="#f4f1ea" stroke-width="50" stroke-linecap="round"><line x1="789.2" y1="626.8" x2="849.2" y2="651.7"/><line x1="626.8" y1="789.2" x2="651.7" y2="849.2"/><line x1="397.2" y1="789.2" x2="372.3" y2="849.2"/><line x1="234.8" y1="626.8" x2="174.8" y2="651.7"/><line x1="234.8" y1="397.2" x2="174.8" y2="372.3"/><line x1="397.2" y1="234.8" x2="372.3" y2="174.8"/><line x1="626.8" y1="234.8" x2="651.7" y2="174.8"/><line x1="789.2" y1="397.2" x2="849.2" y2="372.3"/></g></svg>`;
+const brandSun = mark("suite", "inline", ' class="brand-sun" width="28" height="28" aria-hidden="true"');
 
 function layout(p) {
   const t = ui[p.lang];

@@ -1,5 +1,6 @@
 import { pausePrivacy } from "./privacy-pause.mjs";
 import { queuePrivacy } from "./privacy-queue.mjs";
+import { mark } from "./sunburst.mjs";
 
 // The BrightQueue privacy page stays out of the public build until it has a contact address and BrightQ T3 lands.
 export const QUEUE_PRIVACY_PUBLIC = false;
@@ -67,7 +68,7 @@ const t = {
     prin: [
       ["light", "Light", "Small and quick. Nothing heavy to install, nothing running for no reason."],
       ["calm", "Calm", "No pop-ups that grab your keyboard, no ads, nothing that asks for more of your time than the task needs."],
-      ["plain", "Plain about data", "Each app tells you in plain words what it does with your data."],
+      ["plain", "Plain about data", "No ad trackers, and each app tells you in plain words what it does with your data."],
     ],
   },
   fr: {
@@ -119,19 +120,18 @@ const t = {
     prin: [
       ["light", "Légères", "Petites et rapides. Rien de lourd à installer, rien qui tourne pour rien."],
       ["calm", "Tranquilles", "Pas de fenêtre qui vole le clavier, pas de pub, rien qui demande plus de temps que la tâche n'en a besoin."],
-      ["plain", "Claires sur les données", "Chaque app dit en mots simples ce qu'elle fait de vos données."],
+      ["plain", "Claires sur les données", "Aucun traqueur publicitaire, et chaque app dit en mots simples ce qu'elle fait de vos données."],
     ],
   },
 };
 
-const sun = (cls) => `<svg class="${cls}" viewBox="64 64 896 896" aria-hidden="true"><rect x="64" y="64" width="896" height="896" rx="220" fill="#1f6f54"/><g class="sun-core"><circle cx="512" cy="512" r="205" fill="none" stroke="#f4f1ea" stroke-width="60"/><circle cx="512" cy="512" r="70" fill="#f4f1ea"/></g><g class="sun-rays" stroke="#f4f1ea" stroke-width="50" stroke-linecap="round"><line x1="789.2" y1="626.8" x2="849.2" y2="651.7"/><line x1="626.8" y1="789.2" x2="651.7" y2="849.2"/><line x1="397.2" y1="789.2" x2="372.3" y2="849.2"/><line x1="234.8" y1="626.8" x2="174.8" y2="651.7"/><line x1="234.8" y1="397.2" x2="174.8" y2="372.3"/><line x1="397.2" y1="234.8" x2="372.3" y2="174.8"/><line x1="626.8" y1="234.8" x2="651.7" y2="174.8"/><line x1="789.2" y1="397.2" x2="849.2" y2="372.3"/></g></svg>`;
 
-const DARK = "(prefers-color-scheme: dark)";
 const lazy = ' loading="lazy" decoding="async"';
 const pair = (base, alt, sizes, eager) =>
   `<img src="/assets/img/${base}-720.webp" srcset="/assets/img/${base}-480.webp 480w, /assets/img/${base}-720.webp 720w" sizes="${sizes}" width="720" height="960" alt="${alt}"${eager ? "" : lazy}>`;
 const themed = (kind, alt, sizes) =>
-  `<picture><source media="${DARK}" srcset="/assets/img/queue-${kind}-dark-480.webp 480w, /assets/img/queue-${kind}-dark-720.webp 720w" sizes="${sizes}">${pair(`queue-${kind}-light`, alt, sizes)}</picture>`;
+  pair(`queue-${kind}-light`, alt, sizes).replace("<img ", '<img class="day-only" ') +
+  pair(`queue-${kind}-dark`, alt, sizes).replace("<img ", '<img class="night-only" ');
 const FEAT_SIZES = "(min-width: 900px) 380px, min(380px, calc(100vw - 32px))";
 
 function pauseMedia(kind, lang, alt) {
@@ -153,7 +153,7 @@ function home(lang) {
   const pre = lang === "fr" ? "/fr" : "";
   return `
 <section class="hero"><div class="sky" aria-hidden="true"><i class="shoot s1"></i><i class="shoot s2"></i><i class="shoot s3"></i></div><div class="wrap">
-  ${sun("hero-sun hero-day")}<svg class="hero-sun hero-moon" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#1f6f54"/><circle cx="30" cy="34" r="17" fill="#f4f1ea"/><circle cx="39" cy="27" r="14" fill="#1f6f54"/><circle cx="46" cy="15" r="2" fill="#f4f1ea"/><circle cx="52" cy="26" r="1.4" fill="#f4f1ea"/></svg>
+  ${mark("suite", "inline", ' class="hero-sun hero-day" aria-hidden="true"')}<svg class="hero-sun hero-moon" viewBox="0 0 64 64" aria-hidden="true"><rect class="bs-tile" width="64" height="64" rx="16"/><circle class="bs-mark" cx="30" cy="34" r="17"/><circle class="bs-tile" cx="39" cy="27" r="14"/><circle class="bs-mark" cx="46" cy="15" r="2"/><circle class="bs-mark" cx="52" cy="26" r="1.4"/></svg>
   <h1 class="tw">${s.h1}</h1>
   <p class="lead">${s.lead}</p>
   <div class="actions">
@@ -165,7 +165,7 @@ function home(lang) {
       <img class="desk-note" src="/assets/img/pause-headsup.webp" width="360" height="138" alt="">
       <div class="desk-bar"></div>
     </div>
-    <div class="phone"><picture><source media="${DARK}" srcset="/assets/img/queue-phone-dark.webp"><img src="/assets/img/queue-phone-light.webp" width="480" height="1039" alt=""></picture></div>
+    <div class="phone"><img class="day-only" src="/assets/img/queue-phone-light.webp" width="480" height="1039" alt="" loading="lazy"><img class="night-only" src="/assets/img/queue-phone-dark.webp" width="480" height="1039" alt="" loading="lazy"></div>
   </div>
 </div></section>
 
@@ -173,7 +173,7 @@ function home(lang) {
   <div class="section-head"><h2 id="apps-h">${s.appsH}</h2><p>${s.appsLead}</p></div>
   <div class="apps">
     <article class="app">
-      <div class="app-title"><img src="/assets/logo/brightpause.svg" alt="" width="48" height="48"><div><h3>BrightPause</h3><p class="tag">${s.pause.tag} <span class="ver">${s.pause.version}</span></p></div></div>
+      <div class="app-title">${mark("pause", "inline", ' width="48" height="48" aria-hidden="true"')}<div><h3>BrightPause</h3><p class="tag">${s.pause.tag} <span class="ver">${s.pause.version}</span></p></div></div>
       <p class="pitch">${s.pause.pitch}</p>
       <div class="links">
         <a class="btn btn-primary" href="${PAUSE_GET}">${s.get}</a>
@@ -183,7 +183,7 @@ function home(lang) {
       <a class="more" href="#brightpause">${s.more}</a>
     </article>
     <article class="app">
-      <div class="app-title"><img src="/assets/logo/brightqueue.svg" alt="" width="48" height="48"><div><h3>BrightQueue</h3><p class="tag">${s.queue.tag}</p></div></div>
+      <div class="app-title">${mark("queue", "inline", ' width="48" height="48" aria-hidden="true"')}<div><h3>BrightQueue</h3><p class="tag">${s.queue.tag}</p></div></div>
       <p class="pitch">${s.queue.pitch}</p>
       <div class="links">
         <a class="btn btn-primary" href="${QUEUE_WEB}">${s.queue.open}</a>
@@ -195,7 +195,7 @@ function home(lang) {
 </div></section>
 
 <section class="section app-section" id="brightpause" aria-labelledby="bp-h"><div class="wrap">
-  <div class="section-head"><img src="/assets/logo/brightpause.svg" alt="" width="64" height="64"><h2 id="bp-h">BrightPause</h2>
+  <div class="section-head">${mark("pause", "inline", ' width="64" height="64" aria-hidden="true"')}<h2 id="bp-h">BrightPause</h2>
     <button class="btn btn-ghost try" type="button" data-break hidden>${s.pause.tryIt}</button></div>
   <dialog class="breakdlg" aria-labelledby="dlg-h">
     <p class="dlg-kicker">${s.pause.dlgKicker}</p>
@@ -208,7 +208,7 @@ function home(lang) {
 </div></section>
 
 <section class="section app-section band" id="brightqueue" aria-labelledby="bq-h"><div class="wrap">
-  <div class="section-head"><img src="/assets/logo/brightqueue.svg" alt="" width="64" height="64"><h2 id="bq-h">BrightQueue</h2>
+  <div class="section-head">${mark("queue", "inline", ' width="64" height="64" aria-hidden="true"')}<h2 id="bq-h">BrightQueue</h2>
     <div class="fact" data-facts="${s.queue.facts.join("|")}"><span class="fact-label">${s.queue.factLabel}</span><p class="fact-text" aria-live="polite">${s.queue.facts[0]}</p><button class="fact-next" type="button" hidden>${s.queue.factNext}</button></div></div>
   ${s.queue.features.map(([k, h, p, alt], i) => feature(i, h, p, `<div class="frame tall">${themed(k, alt, FEAT_SIZES)}</div>`)).join("")}
   <p class="caption">${s.queue.note}</p>
