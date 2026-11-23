@@ -418,7 +418,7 @@ button.btn { font-family: inherit; cursor: pointer; }
 
 /* Hero effects: typewriter headline, night sky with rare shooting stars, day glow */
 .hero { position: relative; isolation: isolate; }
-.sky { position: absolute; inset: 0 0 auto 0; height: min(760px, 90vh); overflow: hidden; z-index: -1; pointer-events: none; }
+.sky { position: absolute; inset: 0 0 auto 0; height: min(760px, 90vh); overflow: hidden; z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent); }
 .sky::before, .sky::after { content: ""; position: absolute; inset: 0; opacity: 0; }
 .sky::after { background: radial-gradient(42% 60% at 50% 0%, rgb(255 214 140 / 28%), transparent 70%); opacity: 1; }
 .shoot { position: absolute; display: none; width: 160px; height: 2px; border-radius: 1px; opacity: 0; filter: drop-shadow(0 0 3px rgb(255 255 255 / 60%));

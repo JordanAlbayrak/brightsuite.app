@@ -22,7 +22,7 @@ ${pageCss}
   linear-gradient(160deg, var(--bg-2), var(--desk-b)); }
 
 /* hero motif per theme, behind the hero content */
-.hero::before { content: ""; position: absolute; inset: 0 0 auto 0; height: min(760px, 90vh); z-index: -1; pointer-events: none; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto 0; height: min(760px, 90vh); z-index: -1; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent); }
 :root[data-el="forest"] .hero::before, :root:not([data-el]) .hero::before { background:
   radial-gradient(38% 46% at 6% 18%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%),
   radial-gradient(30% 40% at 94% 30%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%); }
@@ -42,6 +42,11 @@ ${pageCss}
   radial-gradient(1.5px 1.5px at 230px 170px, var(--muted), transparent),
   radial-gradient(55% 45% at 70% 20%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
   background-size: 260px 220px, 260px 220px, 260px 220px, 260px 220px, 100% 100%; }
+@media (max-width: 640px) {
+  :root[data-el="ocean"] .hero::before { background:
+    repeating-radial-gradient(140% 50% at 50% 125%, transparent 0 40px, color-mix(in srgb, var(--accent) 9%, transparent) 40px 41px),
+    linear-gradient(transparent 50%, color-mix(in srgb, var(--accent) 7%, transparent)); }
+}
 :root[data-el="cave"] .hero::before { background:
   radial-gradient(48% 42% at 50% 0%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 70%),
   radial-gradient(120% 90% at 50% 40%, transparent 55%, color-mix(in srgb, var(--ink) 10%, transparent)); }
