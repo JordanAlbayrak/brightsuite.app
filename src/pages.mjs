@@ -152,7 +152,7 @@ function home(lang) {
   const s = t[lang];
   const pre = lang === "fr" ? "/fr" : "";
   return `
-<section class="hero"><div class="sky" aria-hidden="true"><i class="shoot s1"></i><i class="shoot s2"></i><i class="shoot s3"></i></div><div class="wrap">
+<section class="hero"><div class="sky" aria-hidden="true"><canvas class="stars"></canvas><i class="shoot s1"></i><i class="shoot s2"></i><i class="shoot s3"></i></div><div class="wrap">
   ${mark("suite", "inline", ' class="hero-sun hero-day" aria-hidden="true"')}<svg class="hero-sun hero-moon" viewBox="0 0 64 64" aria-hidden="true"><rect class="bs-tile" width="64" height="64" rx="16"/><circle class="bs-mark" cx="30" cy="34" r="17"/><circle class="bs-tile" cx="39" cy="27" r="14"/><circle class="bs-mark" cx="46" cy="15" r="2"/><circle class="bs-mark" cx="52" cy="26" r="1.4"/></svg>
   <h1 class="tw">${s.h1}</h1>
   <p class="lead">${s.lead}</p>
