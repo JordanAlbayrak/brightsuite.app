@@ -89,13 +89,10 @@
       { at: [0.13, 0.17],
         s: [[11.06, 61.75], [11.03, 56.38], [11.90, 53.69], [12.26, 57.03], [12.90, 55.96], [13.40, 54.93], [13.79, 49.31]],
         l: [[0, 1], [1, 2], [2, 3], [3, 0], [3, 4], [4, 5], [5, 6]] },
-      { at: [0.79, 0.13],
-        s: [[0.15, 59.15], [0.68, 56.54], [0.95, 60.72], [1.43, 60.24], [1.91, 63.67]],
-        l: [[0, 1], [1, 2], [2, 3], [3, 4]] },
       { at: [0.09, 0.6],
         s: [[5.92, 7.41], [5.42, 6.35], [5.68, -1.94], [5.60, -1.20], [5.53, -0.30], [5.80, -9.67], [5.24, -8.20], [5.59, 9.93]],
         l: [[7, 0], [7, 1], [0, 2], [1, 4], [4, 3], [3, 2], [2, 5], [4, 6]] },
-      { at: [0.9, 0.45],
+      { at: [0.94, 0.4],
         s: [[20.69, 45.28], [20.37, 40.26], [19.51, 27.96], [19.75, 45.13], [20.77, 33.97]],
         l: [[0, 1], [1, 2], [3, 1], [1, 4]] },
       { at: [0.73, 0.38],
@@ -111,7 +108,7 @@
     // The one invented constellation: the BrightSuite sun, a ring of eight around a bright centre.
     var sunRing = [[0, 0]];
     for (var q = 0; q < 8; q++) sunRing.push([Math.cos(q * Math.PI / 4) * 3, Math.sin(q * Math.PI / 4) * 3]);
-    SKY.push({ at: [0.6, 0.12],
+    SKY.push({ at: [0.6, 0],
       flat: sunRing, l: [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]] });
 
     var BACK = [20000, 10000], FADE = 2500;
@@ -126,9 +123,9 @@
     // with one shared scale so their sizes stay true to each other.
     var layout = function () {
       stars = []; links = [];
-      var k = Math.min(W, 1500) * 0.0085;
+      var k = Math.min(W, 1500) * 0.0064;
       SKY.forEach(function (c) {
-        var pts = c.flat ? c.flat.map(function (p) { return [p[0] * 5, p[1] * 5]; }) : null;
+        var pts = c.flat ? c.flat.map(function (p) { return [p[0] * 2.5, p[1] * 2.5]; }) : null;
         if (!pts) {
           var ra0 = 0, de0 = 0;
           c.s.forEach(function (p) { ra0 += p[0]; de0 += p[1]; });
@@ -137,7 +134,7 @@
           pts = c.s.map(function (p) { return [-(p[0] - ra0) * 15 * cosd, -(p[1] - de0)]; });
         }
         c.stars = pts.map(function (p, i) {
-          var st = { x: c.at[0] * W + p[0] * k, y: c.at[1] * H + p[1] * k, r: c.flat && i === 0 ? 2.4 : 1.6, ox: 0, oy: 0, a: 1, gone: false, back: 0, c: c };
+          var st = { x: c.at[0] * W + p[0] * k, y: c.at[1] * H + p[1] * k, r: c.flat && i === 0 ? 1.8 : 1.25, ox: 0, oy: 0, a: 1, gone: false, back: 0, c: c };
           stars.push(st); return st;
         });
         c.box = c.stars.reduce(function (b, s) { return { l: Math.min(b.l, s.x), r: Math.max(b.r, s.x), t: Math.min(b.t, s.y), b: Math.max(b.b, s.y) }; }, { l: 1e9, r: -1e9, t: 1e9, b: -1e9 });
@@ -166,7 +163,7 @@
       var cs = getComputedStyle(root);
       var dark = root.getAttribute("data-theme") === "dark" || (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
       ink = (dark ? cs.getPropertyValue("--ink") : cs.getPropertyValue("--accent")).trim() || "#888";
-      starA = dark ? 0.85 : 0.55; lineA = dark ? 0.2 : 0.16;
+      starA = dark ? 0.7 : 0.45; lineA = dark ? 0.12 : 0.1;
     };
     var size = function () {
       var r = cv.getBoundingClientRect();
