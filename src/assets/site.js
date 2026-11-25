@@ -114,6 +114,7 @@
     var BACK = [20000, 10000], FADE = 2500;
     // Hidden extra: drag the empty sky with a mouse to drift through space. Constellations wrap
     // around, a faint far layer moves slower, and now and then a planet passes closer by.
+    var roam = window.matchMedia && matchMedia("(hover: hover) and (pointer: fine)").matches;
     var hero = cv.closest(".hero"), camX = 0, camY = 0, vx = 0, vy = 0, drag = null, accent = "#888", pHi = "#fff", pLo = "#000";
     var wrap = function (v, size, pad) { var p = size + 2 * pad; return ((v + pad) % p + p) % p - pad - v; };
     var hash = function (i, j, k) { var h = Math.sin(i * 127.1 + j * 311.7 + k * 74.7) * 43758.5453; return h - Math.floor(h); };
@@ -201,6 +202,7 @@
         }
     };
     var planets = function () {
+      if (!roam) return;
       var P = 700, px = camX * 1.3, py = camY * 1.3;
       for (var gx = Math.floor(-px / P) - 1; gx * P + px < W + P; gx++)
         for (var gy = Math.floor(-py / P) - 1; gy * P + py < H + P; gy++) {
@@ -313,7 +315,7 @@
     var NOGRAB = "a,button,input,select,textarea,label,summary,h1,h2,h3,p,li,img,svg,figure,video,dialog,.actions,.stage";
     var endDrag = function () { if (!drag) return; if (performance.now() - drag.t > 90) vx = vy = 0; drag = null; hero.classList.remove("sky-drag"); wake(); };
     window.addEventListener("pointerdown", function (e) {
-      if (e.pointerType !== "mouse" || e.button !== 0 || (still && still.matches) || !hero) return;
+      if (!roam || e.pointerType !== "mouse" || e.button !== 0 || (still && still.matches) || !hero) return;
       var r = cv.getBoundingClientRect(), t = e.target;
       if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
       if (!t.closest || !hero.contains(t) || t.closest(NOGRAB)) return;
