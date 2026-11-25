@@ -19,7 +19,7 @@ fs.writeFileSync(path.join(OUT, "favicon.svg"), mark("suite"));
 fs.writeFileSync(path.join(OUT, "CNAME"), "brightsuite.app");
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 
-const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")d.setAttribute("data-theme",t)}catch(e){}var e;try{e=localStorage.getItem("el")}catch(x){}if(/^(forest|ocean|sky|space|cave)$/.test(e))d.setAttribute("data-el",e);if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("tw-wait")})();`;
+const themeScript = `(function(){var d=document.documentElement;var t;try{t=localStorage.getItem("theme");}catch(e){}d.setAttribute("data-theme",t==="light"?"light":"dark");var e;try{e=localStorage.getItem("el")}catch(x){}if(/^(forest|ocean|sky|space|cave)$/.test(e))d.setAttribute("data-el",e);if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("tw-wait")})();`;
 const themeHash = crypto.createHash("sha256").update(themeScript).digest("base64");
 const csp = [
   "default-src 'none'",
@@ -73,9 +73,8 @@ function layout(p) {
 <meta name="referrer" content="no-referrer">
 <title>${p.lang === "fr" ? frType(p.title) : p.title}</title>
 <meta name="description" content="${p.lang === "fr" ? frType(p.description) : p.description}">
-${p.head ?? ""}${p.noindex ? '<meta name="robots" content="noindex">\n' : ""}<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f1513" media="(prefers-color-scheme: dark)">
+${p.head ?? ""}${p.noindex ? '<meta name="robots" content="noindex">\n' : ""}<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0f1513">
 <link rel="canonical" href="${SITE}${p.path}">
 <link rel="alternate" hreflang="en" href="${SITE}${enPath}">
 <link rel="alternate" hreflang="fr" href="${SITE}${frPath}">
