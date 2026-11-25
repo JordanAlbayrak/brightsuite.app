@@ -433,6 +433,7 @@ button.btn { font-family: inherit; cursor: pointer; }
 :root[data-theme="dark"] .sky::after { opacity: 0; animation: none; }
 :root[data-theme="dark"] .shoot { display: block; }
 .stars { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero.sky-drag { cursor: grabbing; -webkit-user-select: none; user-select: none; }
 
 .tw-wait .hero h1.tw { visibility: hidden; animation: tw-fallback 0s 2.5s forwards; }
 @keyframes tw-fallback { to { visibility: visible; } }

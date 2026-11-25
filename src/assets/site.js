@@ -112,6 +112,11 @@
       flat: sunRing, l: [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]] });
 
     var BACK = [20000, 10000], FADE = 2500;
+    // Hidden extra: drag the empty sky with a mouse to drift through space. Constellations wrap
+    // around, a faint far layer moves slower, and now and then a planet passes closer by.
+    var hero = cv.closest(".hero"), camX = 0, camY = 0, vx = 0, vy = 0, drag = null, accent = "#888", pHi = "#fff", pLo = "#000";
+    var wrap = function (v, size, pad) { var p = size + 2 * pad; return ((v + pad) % p + p) % p - pad - v; };
+    var hash = function (i, j, k) { var h = Math.sin(i * 127.1 + j * 311.7 + k * 74.7) * 43758.5453; return h - Math.floor(h); };
     var ctx = cv.getContext("2d");
     var W = 0, H = 0, dpr = 1, stars = [], links = [], sparks = [], dust = [];
     var ink = "#fff", lineA = 0.18, starA = 0.8, running = false, onScreen = true, ptr = null, ptrT = 0, nextBack = 0;
@@ -164,6 +169,8 @@
       var dark = root.getAttribute("data-theme") === "dark" || (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
       ink = (dark ? cs.getPropertyValue("--ink") : cs.getPropertyValue("--accent")).trim() || "#888";
       starA = dark ? 0.7 : 0.45; lineA = dark ? 0.12 : 0.1;
+      var v = function (n) { return cs.getPropertyValue(n).trim() || "#888"; };
+      accent = v("--accent"); pHi = dark ? v("--ink") : v("--bg"); pLo = dark ? v("--bg-2") : v("--ink");
     };
     var size = function () {
       var r = cv.getBoundingClientRect();
@@ -173,13 +180,51 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       layout();
     };
-    var X = function (s) { return s.x + s.ox; };
-    var Y = function (s) { return s.y + s.oy; };
+    var place = function () {
+      SKY.forEach(function (c) {
+        c.wx = wrap((c.box.l + c.box.r) / 2 + camX, W, 160); c.wy = wrap((c.box.t + c.box.b) / 2 + camY, H, 120);
+      });
+      stars.forEach(function (s) { if (!s.c) { s.wx = wrap(s.x + camX, W, 10); s.wy = wrap(s.y + camY, H, 10); } });
+    };
+    var X = function (s) { return s.x + s.ox + camX + (s.c ? s.c.wx : s.wx); };
+    var Y = function (s) { return s.y + s.oy + camY + (s.c ? s.c.wy : s.wy); };
+    var far = function () {
+      var fade = Math.min(1, Math.sqrt(camX * camX + camY * camY) / 300), G = 90, fx = camX * 0.35, fy = camY * 0.35;
+      if (fade < 0.02) return;
+      for (var gx = Math.floor(-fx / G) - 1; gx * G + fx < W + G; gx++)
+        for (var gy = Math.floor(-fy / G) - 1; gy * G + fy < H + G; gy++) {
+          var h = hash(gx, gy, 1); if (h > 0.55) continue;
+          var x = gx * G + fx + hash(gx, gy, 2) * G, y = gy * G + fy + hash(gx, gy, 3) * G;
+          ctx.globalAlpha = starA * (0.25 + 0.35 * hash(gx, gy, 4)) * fade * clear(x, y);
+          if (ctx.globalAlpha < 0.01) continue;
+          ctx.beginPath(); ctx.arc(x, y, 0.5 + 0.5 * h, 0, 6.283); ctx.fill();
+        }
+    };
+    var planets = function () {
+      var P = 700, px = camX * 1.3, py = camY * 1.3;
+      for (var gx = Math.floor(-px / P) - 1; gx * P + px < W + P; gx++)
+        for (var gy = Math.floor(-py / P) - 1; gy * P + py < H + P; gy++) {
+          if (hash(gx, gy, 5) > 0.5) continue;
+          var wx = gx * P + hash(gx, gy, 6) * P, wy = gy * P + hash(gx, gy, 7) * P;
+          if (wx > -80 && wx < W + 80 && wy > -80 && wy < H + 80) continue; // never in the opening view
+          var x = wx + px, y = wy + py, r = 9 + 16 * hash(gx, gy, 8), a = clear(x, y);
+          if (a < 0.02 || x < -3 * r || x > W + 3 * r || y < -3 * r || y > H + 3 * r) continue;
+          var ring = hash(gx, gy, 9) < 0.4, tilt = hash(gx, gy, 10) - 0.5;
+          ctx.strokeStyle = accent; ctx.lineWidth = 1.2;
+          if (ring) { ctx.globalAlpha = 0.3 * a; ctx.beginPath(); ctx.ellipse(x, y, r * 2, r * 0.55, tilt, 0, 6.283); ctx.stroke(); }
+          var g = ctx.createRadialGradient(x - r * 0.4, y - r * 0.4, r * 0.1, x, y, r);
+          g.addColorStop(0, pHi); g.addColorStop(0.5, accent); g.addColorStop(1, pLo);
+          ctx.globalAlpha = 0.85 * a; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
+          if (ring) { ctx.globalAlpha = 0.3 * a; ctx.beginPath(); ctx.ellipse(x, y, r * 2, r * 0.55, tilt, 0, Math.PI); ctx.stroke(); }
+        }
+      ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 1;
+    };
     var ease = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
 
     var draw = function (now) {
       ctx.clearRect(0, 0, W, H);
       ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 1;
+      place(); far();
       SKY.forEach(function (c) {
         var n = c.links.length, done = n;
         for (var i = 0; i < n && i < done; i++) {
@@ -198,6 +243,7 @@
         if (ctx.globalAlpha < 0.01) continue;
         ctx.beginPath(); ctx.arc(X(s), Y(s), s.r * (0.4 + 0.6 * s.a), 0, 6.283); ctx.fill();
       }
+      planets();
       for (var p = sparks.length - 1; p >= 0; p--) {
         var t = (now - sparks[p].t) / 600;
         if (t >= 1) { sparks.splice(p, 1); continue; }
@@ -211,7 +257,12 @@
     var step = function (now) {
       var dt = last ? Math.min(64, now - last) : 16; last = now;
       // A resting mouse keeps pulling; a tap pulls for a few seconds.
-      var hunting = ptr && (!ptr.touch || now - ptrT < 7000), busy = sparks.length > 0;
+      var busy = sparks.length > 0;
+      if (!drag && Math.abs(vx) + Math.abs(vy) > 0.05) {
+        var f = Math.pow(0.93, dt / 16); camX += vx * dt / 16; camY += vy * dt / 16; vx *= f; vy *= f; busy = true;
+      } else if (!drag) { vx = 0; vy = 0; }
+      place();
+      var hunting = !drag && ptr && (!ptr.touch || now - ptrT < 7000);
       var R = ptr && ptr.touch ? 190 : 170;
       nextBack = 0;
       for (var i = 0; i < stars.length; i++) {
@@ -249,6 +300,7 @@
       running = true; requestAnimationFrame(frame);
     };
     var aim = function (e, touch) {
+      if (drag) return;
       var r = cv.getBoundingClientRect();
       var x = e.clientX - r.left, y = e.clientY - r.top;
       if (x < 0 || y < 0 || x > r.width || y > r.height) { if (ptr && !ptr.touch) { ptr = null; wake(); } return; }
@@ -257,6 +309,28 @@
     window.addEventListener("pointermove", function (e) { if (e.pointerType !== "touch") aim(e, false); }, { passive: true });
     document.addEventListener("pointerout", function (e) { if (!e.relatedTarget && ptr && !ptr.touch) { ptr = null; wake(); } }, { passive: true });
     window.addEventListener("pointerdown", function (e) { if (e.pointerType === "touch") aim(e, true); }, { passive: true });
+    // Drag only starts on empty sky, so text selection, links and the product stage work as before.
+    var NOGRAB = "a,button,input,select,textarea,label,summary,h1,h2,h3,p,li,img,svg,figure,video,dialog,.actions,.stage";
+    var endDrag = function () { if (!drag) return; if (performance.now() - drag.t > 90) vx = vy = 0; drag = null; hero.classList.remove("sky-drag"); wake(); };
+    window.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse" || e.button !== 0 || (still && still.matches) || !hero) return;
+      var r = cv.getBoundingClientRect(), t = e.target;
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+      if (!t.closest || !hero.contains(t) || t.closest(NOGRAB)) return;
+      e.preventDefault();
+      drag = { x: e.clientX, y: e.clientY, t: performance.now() }; vx = vy = 0; ptr = null;
+      hero.classList.add("sky-drag");
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      if (!e.buttons) { endDrag(); return; }
+      var now = performance.now(), dx = e.clientX - drag.x, dy = e.clientY - drag.y, k = 16 / Math.max(8, now - drag.t);
+      camX += dx; camY += dy; vx = vx * 0.5 + dx * k * 0.5; vy = vy * 0.5 + dy * k * 0.5;
+      drag.x = e.clientX; drag.y = e.clientY; drag.t = now; wake();
+    }, { passive: true });
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+    window.addEventListener("blur", endDrag);
     var redraw = function () { colours(); draw(performance.now()); };
     if (window.ResizeObserver) new ResizeObserver(function () { size(); findZone(); redraw(); }).observe(cv);
     if (window.IntersectionObserver) new IntersectionObserver(function (en) { onScreen = en[0].isIntersecting; if (onScreen) wake(); }).observe(cv);
