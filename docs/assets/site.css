@@ -314,7 +314,8 @@ a:hover { color: var(--accent-hover); }
 .policy-grid p { color: var(--muted); margin: 0; font-size: 0.9375rem; }
 .policy code {
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 0.875em;
-  background: var(--bg-2); border: 1px solid var(--line); padding: 1px 5px; border-radius: 6px; overflow-wrap: anywhere;
+  background: var(--bg-2); border: 1px solid var(--line); padding: 1px 5px; border-radius: 6px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
 
 /* Policy pages */

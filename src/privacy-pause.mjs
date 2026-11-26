@@ -3,12 +3,15 @@
 const ISSUES = "https://github.com/JordanAlbayrak/BrightPause/issues";
 const HISTORY = "https://github.com/JordanAlbayrak/BrightPause/commits/main/PRIVACY.md";
 
+// Long folder paths may wrap only after a dot or a backslash.
+const paths = (html) => html.replace(/<code>([^<]*\\[^<]*)<\/code>/g, (_, c) => "<code>" + c.replace(/([.\\])/g, "$1<wbr>") + "</code>");
+
 const block = (h, meta, lead, parts) => `<div class="policy" id="bp-privacy">
     <h3>${h}</h3>
     <p class="meta">${meta}</p>
     <p class="policy-lead">${lead}</p>
     <div class="policy-grid">
-      ${parts.map(([t, p]) => `<div><h4>${t}</h4><p>${p}</p></div>`).join("\n      ")}
+      ${parts.map(([t, p]) => `<div><h4>${t}</h4><p>${paths(p)}</p></div>`).join("\n      ")}
     </div>
   </div>`;
 
