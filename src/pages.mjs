@@ -178,7 +178,7 @@ function home(lang) {
       <div class="links">
         <a class="btn btn-primary" href="${PAUSE_GET}">${s.get}</a>
         <a class="btn btn-ghost" href="${PAUSE_GH}">${s.pause.source}</a>
-        <a class="btn btn-ghost" href="${pre}/pause/privacy/">${s.privacy}</a>
+        <a class="btn btn-ghost" href="#bp-privacy">${s.privacy}</a>
       </div>
       <a class="more" href="#brightpause">${s.more}</a>
     </article>
@@ -205,6 +205,7 @@ function home(lang) {
     <form method="dialog"><button class="btn btn-primary" type="submit">${s.pause.dlgClose}</button></form>
   </dialog>
   ${s.pause.features.map(([k, h, p, alt], i) => feature(i, h, p, pauseMedia(k, lang, alt))).join("")}
+  ${pausePrivacy[lang]}
 </div></section>
 
 <section class="section app-section band" id="brightqueue" aria-labelledby="bq-h"><div class="wrap">
@@ -237,9 +238,8 @@ export const pages = [
   ] : []),
   { lang: "en", path: "/", alt: "/fr/", title: t.en.title, description: t.en.description, body: home("en") },
   { lang: "fr", path: "/fr/", alt: "/", title: t.fr.title, description: t.fr.description, body: home("fr") },
-  { lang: "en", path: "/pause/privacy/", alt: "/fr/pause/privacy/", ...pausePrivacy.en },
-  { lang: "fr", path: "/fr/pause/privacy/", alt: "/pause/privacy/", ...pausePrivacy.fr },
   ...[["en", "/pause/", "/fr/pause/", "/#brightpause", "BrightPause", "Go to BrightPause"], ["fr", "/fr/pause/", "/pause/", "/fr/#brightpause", "BrightPause", "Aller à BrightPause"],
+       ["en", "/pause/privacy/", "/fr/pause/privacy/", "/#bp-privacy", "BrightPause privacy", "Go to the BrightPause privacy policy"], ["fr", "/fr/pause/privacy/", "/pause/privacy/", "/fr/#bp-privacy", "Confidentialité de BrightPause", "Aller à la politique de confidentialité de BrightPause"],
        ["en", "/queue/", "/fr/queue/", "/#brightqueue", "BrightQueue", "Go to BrightQueue"], ["fr", "/fr/queue/", "/queue/", "/fr/#brightqueue", "BrightQueue", "Aller à BrightQueue"]]
     .map(([lang, path, alt, to, name, go]) => ({ lang, path, alt, noindex: true, title: `${name}: BrightSuite`, description: name,
       head: `<meta http-equiv="refresh" content="0; url=${to}">

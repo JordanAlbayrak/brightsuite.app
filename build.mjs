@@ -44,12 +44,12 @@ const foot = {
   en: `<footer class="foot"><div class="wrap">
   <div><p><strong>BrightSuite</strong></p><p>Free apps for body and mind. This site sets no cookies and loads nothing from other sites.</p><p>&copy; 2026 BrightSuite</p></div>
   <div><h2>Apps</h2><ul><li><a href="/#brightpause">BrightPause</a></li><li><a href="/#brightqueue">BrightQueue</a></li></ul></div>
-  <div><h2>Privacy</h2><ul><li><a href="/pause/privacy/">BrightPause privacy</a></li>${QUEUE_PRIVACY_PUBLIC ? `<li><a href="/queue/privacy/">BrightQueue privacy</a></li>` : ""}</ul></div>
+  ${QUEUE_PRIVACY_PUBLIC ? `<div><h2>Privacy</h2><ul><li><a href="/queue/privacy/">BrightQueue privacy</a></li></ul></div>` : ""}
 </div></footer>`,
   fr: `<footer class="foot"><div class="wrap">
   <div><p><strong>BrightSuite</strong></p><p>Des apps gratuites pour le corps et l'esprit. Ce site ne dépose aucun cookie et ne charge rien depuis d'autres sites.</p><p>&copy; 2026 BrightSuite</p></div>
   <div><h2>Apps</h2><ul><li><a href="/fr/#brightpause">BrightPause</a></li><li><a href="/fr/#brightqueue">BrightQueue</a></li></ul></div>
-  <div><h2>Confidentialité</h2><ul><li><a href="/fr/pause/privacy/">Confidentialité de BrightPause</a></li>${QUEUE_PRIVACY_PUBLIC ? `<li><a href="/fr/queue/privacy/">Confidentialité de BrightQueue</a></li>` : ""}</ul></div>
+  ${QUEUE_PRIVACY_PUBLIC ? `<div><h2>Confidentialité</h2><ul><li><a href="/fr/queue/privacy/">Confidentialité de BrightQueue</a></li></ul></div>` : ""}
 </div></footer>`,
 };
 

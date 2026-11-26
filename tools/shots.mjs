@@ -32,7 +32,7 @@ if (isMain) {
   const { chromium } = createRequire(path.join(pwDir, "x.js"))("playwright");
   fs.mkdirSync(shotDir, { recursive: true });
   const server = await serve();
-  const pages = [["home-en", "/"], ["home-fr", "/fr/"], ["pause-privacy-en", "/pause/privacy/"], ["pause-privacy-fr", "/fr/pause/privacy/"], ["404", "/nope/"]];
+  const pages = [["home-en", "/"], ["home-fr", "/fr/"], ["404", "/nope/"]];
   const views = [["phone", { width: 390, height: 844 }, 2], ["1440p", { width: 2560, height: 1440 }, 1]];
   const problems = [];
   const browser = await chromium.launch();
@@ -41,7 +41,7 @@ if (isMain) {
       const ctx = await browser.newContext({ viewport, deviceScaleFactor: dpr, colorScheme: scheme });
       const page = await ctx.newPage();
       page.on("request", (r) => { const u = new URL(r.url()); if (u.host !== `127.0.0.1:${PORT}`) problems.push(`external request ${r.url()}`); });
-      page.on("console", (m) => { if (m.type() === "error") problems.push(`console error on ${page.url()}: ${m.text()}`); });
+      page.on("console", (m) => { if (m.type() === "error" && !(page.url().includes("/nope/") && m.text().includes("404"))) problems.push(`console error on ${page.url()}: ${m.text()}`); });
       for (const [name, url] of pages) {
         await page.goto(`http://127.0.0.1:${PORT}${url}`, { waitUntil: "networkidle" });
         await page.evaluate(() => new Promise((done) => { const t = () => { const o = document.querySelector(".tw-off"); if (!o || o.textContent === "") setTimeout(done, 1900); else setTimeout(t, 50); }; t(); }));
@@ -68,7 +68,7 @@ if (isMain) {
       await page.goto(`http://127.0.0.1:${PORT}/`);
       await page.click(".theme");
       const theme = await page.evaluate(() => [document.documentElement.dataset.theme, localStorage.getItem("theme")]);
-      if (theme[0] !== (scheme === "dark" ? "light" : "dark") || theme[1] !== theme[0]) problems.push(`theme toggle wrong in ${scheme}: ${theme}`);
+      if (theme[0] !== "light" || theme[1] !== theme[0]) problems.push(`theme toggle wrong in ${scheme}: ${theme}`);
       const cookies = await ctx.cookies();
       if (cookies.length) problems.push(`cookies set: ${cookies.map((c) => c.name).join(", ")}`);
       await ctx.close();

@@ -57,7 +57,7 @@
       <div class="links">
         <a class="btn btn-primary" href="https://apps.microsoft.com/detail/9N9B4C21TLDL">Obtenir du Microsoft Store</a>
         <a class="btn btn-ghost" href="https://github.com/JordanAlbayrak/BrightPause">Code source</a>
-        <a class="btn btn-ghost" href="/fr/pause/privacy/">Confidentialité</a>
+        <a class="btn btn-ghost" href="#bp-privacy">Confidentialité</a>
       </div>
       <a class="more" href="#brightpause">Comment ça marche</a>
     </article>
@@ -96,6 +96,18 @@
       <div class="feature-text"><h3>Reste discret</h3><p>Les pauses attendent quand une autre app utilise votre micro pour un appel, ou quand un jeu, une vidéo ou une autre app est en plein écran. Cinq minutes loin du clavier comptent comme une pause. Pas de compte, aucun accès réseau, et vos réglages restent sur votre PC.</p></div>
       <div class="feature-media"><div class="frame tall"><img src="/assets/img/pause-settings-fr-720.webp" srcset="/assets/img/pause-settings-fr-480.webp 480w, /assets/img/pause-settings-fr-720.webp 720w" sizes="(min-width: 900px) 380px, min(380px, calc(100vw - 32px))" width="720" height="960" alt="Les réglages de BrightPause : les pauses prises aujourd'hui, le compte de la semaine, les boutons de mise en pause et le rythme des pauses." loading="lazy" decoding="async"></div></div>
     </div>
+  <div class="policy" id="bp-privacy">
+    <h3>Confidentialité</h3>
+    <p class="meta">Politique de confidentialité de BrightPause. Dernière mise à jour : 25 novembre 2026.</p>
+    <p class="policy-lead">BrightPause ne collecte rien sur vous et ne partage rien avec personne. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.</p>
+    <div class="policy-grid">
+      <div><h4>Uniquement sur votre PC</h4><p><code>settings.json</code> garde vos choix. <code>history.jsonl</code> compte une ligne par pause (heure, type, et si vous l'avez prise, reportée ou ignorée) pour les totaux dans les réglages. <code>events.log</code> note quand une pause commence, attend ou se termine et pourquoi, par exemple le nom de fichier d'une app en plein écran; il reste sous 0,5&nbsp;Mo environ. Votre image de fond est aussi conservée, si vous en choisissez une. La version du Store les garde sous <code>%LOCALAPPDATA%\Packages\</code> et sa désinstallation les supprime; la version compilée les garde dans <code>%APPDATA%\io.github.jordanalbayrak.brightpause\</code>. Vous pouvez supprimer l'un ou l'autre dossier à tout moment.</p></div>
+      <div><h4>Microphone</h4><p>Avec « Attendre pendant les appels » activé, BrightPause demande à Windows si une autre app enregistre depuis un microphone, pour qu'une pause ne commence pas au milieu d'un appel. Il n'enregistre jamais, n'ouvre jamais et n'écoute jamais le microphone lui-même, et n'apprend rien de l'autre app, sauf qu'elle enregistre.</p></div>
+      <div><h4>Réseau</h4><p>La version du Store ne se connecte à aucun réseau; le Store livre ses mises à jour. La version compilée se connecte à GitHub uniquement pour vérifier les mises à jour, quand vous appuyez sur « Vérifier les mises à jour » ou activez les mises à jour automatiques (désactivées par défaut). Un lien vers une source sur un écran de pause s'ouvre dans votre navigateur quand vous cliquez dessus. Ni compte, ni pub, ni statistiques d'usage, ni rapports de plantage, ni télémétrie.</p></div>
+      <div><h4>Enfants</h4><p>BrightPause ne collecte aucune information personnelle, de personne, y compris des enfants.</p></div>
+      <div><h4>Modifications et contact</h4><p>Les modifications paraissent ici et dans le code source de l'app, où <a href="https://github.com/JordanAlbayrak/BrightPause/commits/main/PRIVACY.md">son historique montre chaque version</a>. Des questions? <a href="https://github.com/JordanAlbayrak/BrightPause/issues">Ouvrez un ticket sur GitHub</a>.</p></div>
+    </div>
+  </div>
 </div></section>
 
 <section class="section app-section band" id="brightqueue" aria-labelledby="bq-h"><div class="wrap">
@@ -129,7 +141,7 @@
 <footer class="foot"><div class="wrap">
   <div><p><strong>BrightSuite</strong></p><p>Des apps gratuites pour le corps et l'esprit. Ce site ne dépose aucun cookie et ne charge rien depuis d'autres sites.</p><p>&copy; 2026 BrightSuite</p></div>
   <div><h2>Apps</h2><ul><li><a href="/fr/#brightpause">BrightPause</a></li><li><a href="/fr/#brightqueue">BrightQueue</a></li></ul></div>
-  <div><h2>Confidentialité</h2><ul><li><a href="/fr/pause/privacy/">Confidentialité de BrightPause</a></li></ul></div>
+  
 </div></footer>
 </body>
 </html>

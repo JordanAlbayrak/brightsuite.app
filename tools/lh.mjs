@@ -9,7 +9,7 @@ const lighthouse = (await import(pathToFileURL(req.resolve("lighthouse")))).defa
 const chromeLauncher = await import(pathToFileURL(req.resolve("chrome-launcher")));
 const server = await serve(4322);
 const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless=new"] });
-const urls = ["/", "/fr/", "/pause/privacy/"];
+const urls = ["/", "/fr/"];
 for (const preset of ["mobile", "desktop"]) {
   for (const u of urls) {
     const cfg = preset === "desktop" ? (await import(pathToFileURL(path.join(path.dirname(req.resolve("lighthouse")), "../core/config/desktop-config.js")))).default : undefined;

@@ -57,7 +57,7 @@
       <div class="links">
         <a class="btn btn-primary" href="https://apps.microsoft.com/detail/9N9B4C21TLDL">Get it from Microsoft Store</a>
         <a class="btn btn-ghost" href="https://github.com/JordanAlbayrak/BrightPause">Source code</a>
-        <a class="btn btn-ghost" href="/pause/privacy/">Privacy</a>
+        <a class="btn btn-ghost" href="#bp-privacy">Privacy</a>
       </div>
       <a class="more" href="#brightpause">How it works</a>
     </article>
@@ -96,6 +96,18 @@
       <div class="feature-text"><h3>Stays out of your way</h3><p>Breaks wait while another app uses your microphone for a call, or while a game, a video or another app is full screen. Five minutes away from the keyboard counts as a break. No account, no network, and your settings stay on your PC.</p></div>
       <div class="feature-media"><div class="frame tall"><img src="/assets/img/pause-settings-en-720.webp" srcset="/assets/img/pause-settings-en-480.webp 480w, /assets/img/pause-settings-en-720.webp 720w" sizes="(min-width: 900px) 380px, min(380px, calc(100vw - 32px))" width="720" height="960" alt="BrightPause settings: breaks taken today, a week of counts, pause buttons and the break timing options." loading="lazy" decoding="async"></div></div>
     </div>
+  <div class="policy" id="bp-privacy">
+    <h3>Privacy</h3>
+    <p class="meta">BrightPause privacy policy. Last updated 25 November 2026.</p>
+    <p class="policy-lead">BrightPause collects nothing about you and shares nothing with anyone. This covers the Microsoft Store version and the version built from the public source code.</p>
+    <div class="policy-grid">
+      <div><h4>On your PC only</h4><p><code>settings.json</code> holds your choices. <code>history.jsonl</code> has one line per break (time, kind, and whether you took, postponed or skipped it) for the counts in settings. <code>events.log</code> notes when a break starts, waits or ends and why, for example the file name of a full-screen app; it stays under about 0.5&nbsp;MB. Your background picture is kept too, if you pick one. The Store version keeps these under <code>%LOCALAPPDATA%\Packages\</code> and uninstalling deletes them; the source build keeps them in <code>%APPDATA%\io.github.jordanalbayrak.brightpause\</code>. You can delete either folder at any time.</p></div>
+      <div><h4>Microphone</h4><p>With "Wait during calls" on, BrightPause asks Windows whether another app is recording from a microphone, so a break does not start mid-call. It never records, opens or listens to the microphone itself, and learns nothing about the other app except that it is recording.</p></div>
+      <div><h4>Network</h4><p>The Store version makes no network connections; the Store delivers its updates. The source build contacts GitHub only to check for updates, when you press "Check for updates" or turn on automatic updates (off by default). A source link on a break screen opens in your browser when you click it. No accounts, ads, analytics, crash reports or telemetry.</p></div>
+      <div><h4>Children</h4><p>BrightPause collects no personal information from anyone, including children.</p></div>
+      <div><h4>Changes and contact</h4><p>Changes appear here and in the app's source code, where <a href="https://github.com/JordanAlbayrak/BrightPause/commits/main/PRIVACY.md">its history shows every version</a>. Questions: <a href="https://github.com/JordanAlbayrak/BrightPause/issues">open an issue on GitHub</a>.</p></div>
+    </div>
+  </div>
 </div></section>
 
 <section class="section app-section band" id="brightqueue" aria-labelledby="bq-h"><div class="wrap">
@@ -129,7 +141,7 @@
 <footer class="foot"><div class="wrap">
   <div><p><strong>BrightSuite</strong></p><p>Free apps for body and mind. This site sets no cookies and loads nothing from other sites.</p><p>&copy; 2026 BrightSuite</p></div>
   <div><h2>Apps</h2><ul><li><a href="/#brightpause">BrightPause</a></li><li><a href="/#brightqueue">BrightQueue</a></li></ul></div>
-  <div><h2>Privacy</h2><ul><li><a href="/pause/privacy/">BrightPause privacy</a></li></ul></div>
+  
 </div></footer>
 </body>
 </html>

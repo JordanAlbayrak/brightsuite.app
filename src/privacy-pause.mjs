@@ -1,79 +1,32 @@
-const head = (h1, meta) => `
-<div class="wrap"><article class="doc">
-  <div class="doc-head"><img src="/assets/logo/brightpause.svg" alt="" width="56" height="56"><h1>${h1}</h1></div>
-  <p class="meta">${meta}</p>`;
+// The BrightPause privacy policy, shown as a block in the BrightPause section of the home page.
+// /pause/privacy/ (the Microsoft Store "Privacy policy" link) redirects to it.
 const ISSUES = "https://github.com/JordanAlbayrak/BrightPause/issues";
 const HISTORY = "https://github.com/JordanAlbayrak/BrightPause/commits/main/PRIVACY.md";
 
+const block = (h, meta, lead, parts) => `<div class="policy" id="bp-privacy">
+    <h3>${h}</h3>
+    <p class="meta">${meta}</p>
+    <p class="policy-lead">${lead}</p>
+    <div class="policy-grid">
+      ${parts.map(([t, p]) => `<div><h4>${t}</h4><p>${p}</p></div>`).join("\n      ")}
+    </div>
+  </div>`;
+
 export const pausePrivacy = {
-  en: {
-    title: "BrightPause privacy policy",
-    description: "BrightPause collects nothing about you and shares nothing with anyone. The Microsoft Store version makes no network connections at all.",
-    body: `${head("BrightPause privacy policy", "Last updated 22 November 2026")}
-  <p class="summary">BrightPause is a break reminder for Windows. It collects nothing about you and shares nothing with anyone. The Microsoft Store version makes no network connections at all. This policy covers the Microsoft Store version and the version built from the public source code.</p>
-
-  <h2>What stays on your PC</h2>
-  <p>BrightPause stores these files on your PC only:</p>
-  <ul>
-    <li><code>settings.json</code>: your choices (break times, sound, theme, language, shortcuts).</li>
-    <li><code>history.jsonl</code>: one line per break with its time, kind and whether you took, postponed or skipped it. This feeds the "today" and week counts in settings.</li>
-    <li><code>events.log</code>: one line each time a break starts, waits or ends, with the reason (for example a full-screen app, and that app's file name). It helps explain a missed or late break. It stays on your PC, and BrightPause keeps it under about 0.5 MB.</li>
-    <li>Your background picture, if you choose one.</li>
-  </ul>
-  <p>The version built from the source code keeps them in <code>%APPDATA%\\io.github.jordanalbayrak.brightpause\\</code>. The Store version keeps them in its own folder under <code>%LOCALAPPDATA%\\Packages\\</code>, and uninstalling it deletes them. You can delete either folder at any time.</p>
-
-  <h2>Microphone</h2>
-  <p>With "Wait during calls" on, BrightPause asks Windows whether another app is recording from a microphone, so a break does not start in the middle of a call. It never records, opens or listens to the microphone itself, and it learns nothing about the other app except that it is recording.</p>
-
-  <h2>Network</h2>
-  <ul>
-    <li>The Microsoft Store version makes no network connections. The Store delivers its updates.</li>
-    <li>The version built from the source code connects to GitHub only to check for updates, when you press "Check for updates" or turn on automatic updates (off by default).</li>
-    <li>A source link on a break screen opens in your default browser when you click it.</li>
-  </ul>
-  <p>There are no accounts, ads, analytics, crash reports or telemetry, and nothing is shared with anyone.</p>
-
-  <h2>Children</h2>
-  <p>BrightPause collects no personal information from anyone, including children.</p>
-
-  <h2>Changes and contact</h2>
-  <p>Changes to this policy are published on this page and in the app's source code, where <a href="${HISTORY}">its history shows every version</a>. Questions: <a href="${ISSUES}">open an issue on GitHub</a>.</p>
-  <a class="back" href="/#brightpause">Back to BrightPause</a>
-</article></div>`,
-  },
-  fr: {
-    title: "Politique de confidentialité de BrightPause",
-    description: "BrightPause ne collecte rien sur vous et ne partage rien avec personne. La version du Microsoft Store ne se connecte à aucun réseau.",
-    body: `${head("Politique de confidentialité de BrightPause", "Dernière mise à jour : 22 novembre 2026")}
-  <p class="summary">BrightPause est un rappel de pause pour Windows. Il ne collecte rien sur vous et ne partage rien avec personne. La version du Microsoft Store ne se connecte à aucun réseau. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.</p>
-
-  <h2>Ce qui reste sur votre PC</h2>
-  <p>BrightPause conserve ces fichiers uniquement sur votre PC :</p>
-  <ul>
-    <li><code>settings.json</code> : vos choix (rythme des pauses, son, thème, langue, raccourcis).</li>
-    <li><code>history.jsonl</code> : une ligne par pause, avec son heure, son type et si vous l'avez prise, reportée ou ignorée. Ce fichier alimente les totaux du jour et de la semaine dans les réglages.</li>
-    <li><code>events.log</code> : une ligne chaque fois qu'une pause commence, attend ou se termine, avec la raison (par exemple une app en plein écran, et le nom de fichier de cette app). Il aide à expliquer une pause manquée ou en retard. Il reste sur votre PC, et BrightPause le garde sous 0,5 Mo environ.</li>
-    <li>Votre image de fond, si vous en choisissez une.</li>
-  </ul>
-  <p>La version compilée à partir du code source les garde dans <code>%APPDATA%\\io.github.jordanalbayrak.brightpause\\</code>. La version du Store les garde dans son propre dossier sous <code>%LOCALAPPDATA%\\Packages\\</code>, et sa désinstallation les supprime. Vous pouvez supprimer l'un ou l'autre dossier à tout moment.</p>
-
-  <h2>Microphone</h2>
-  <p>Avec « Attendre pendant les appels » activé, BrightPause demande à Windows si une autre app enregistre depuis un microphone, pour qu'une pause ne commence pas au milieu d'un appel. Il n'enregistre jamais, n'ouvre jamais et n'écoute jamais le microphone lui-même, et il n'apprend rien de l'autre app, sauf qu'elle enregistre.</p>
-
-  <h2>Réseau</h2>
-  <ul>
-    <li>La version du Microsoft Store ne se connecte à aucun réseau. Le Store livre ses mises à jour.</li>
-    <li>La version compilée à partir du code source se connecte à GitHub uniquement pour vérifier les mises à jour, quand vous appuyez sur « Vérifier les mises à jour » ou activez les mises à jour automatiques (désactivées par défaut).</li>
-    <li>Un lien vers une source sur un écran de pause s'ouvre dans votre navigateur par défaut quand vous cliquez dessus.</li>
-  </ul>
-  <p>Il n'y a ni compte, ni pub, ni statistiques d'usage, ni rapports de plantage, ni télémétrie, et rien n'est partagé avec qui que ce soit.</p>
-
-  <h2>Enfants</h2>
-  <p>BrightPause ne collecte aucune information personnelle, de personne, y compris des enfants.</p>
-
-  <h2>Modifications et contact</h2>
-  <p>Les modifications de cette politique sont publiées sur cette page et dans le code source de l'app, où <a href="${HISTORY}">son historique montre chaque version</a>. Des questions ? <a href="${ISSUES}">Ouvrez un ticket sur GitHub</a>.</p>
-  <a class="back" href="/fr/#brightpause">Retour à BrightPause</a>
-</article></div>`,
-  },
+  en: block("Privacy", "BrightPause privacy policy. Last updated 25 November 2026.",
+    "BrightPause collects nothing about you and shares nothing with anyone. This covers the Microsoft Store version and the version built from the public source code.", [
+      ["On your PC only", "<code>settings.json</code> holds your choices. <code>history.jsonl</code> has one line per break (time, kind, and whether you took, postponed or skipped it) for the counts in settings. <code>events.log</code> notes when a break starts, waits or ends and why, for example the file name of a full-screen app; it stays under about 0.5&nbsp;MB. Your background picture is kept too, if you pick one. The Store version keeps these under <code>%LOCALAPPDATA%\\Packages\\</code> and uninstalling deletes them; the source build keeps them in <code>%APPDATA%\\io.github.jordanalbayrak.brightpause\\</code>. You can delete either folder at any time."],
+      ["Microphone", "With \"Wait during calls\" on, BrightPause asks Windows whether another app is recording from a microphone, so a break does not start mid-call. It never records, opens or listens to the microphone itself, and learns nothing about the other app except that it is recording."],
+      ["Network", "The Store version makes no network connections; the Store delivers its updates. The source build contacts GitHub only to check for updates, when you press \"Check for updates\" or turn on automatic updates (off by default). A source link on a break screen opens in your browser when you click it. No accounts, ads, analytics, crash reports or telemetry."],
+      ["Children", "BrightPause collects no personal information from anyone, including children."],
+      ["Changes and contact", `Changes appear here and in the app's source code, where <a href="${HISTORY}">its history shows every version</a>. Questions: <a href="${ISSUES}">open an issue on GitHub</a>.`],
+    ]),
+  fr: block("Confidentialité", "Politique de confidentialité de BrightPause. Dernière mise à jour : 25 novembre 2026.",
+    "BrightPause ne collecte rien sur vous et ne partage rien avec personne. Cette politique couvre la version du Microsoft Store et la version compilée à partir du code source public.", [
+      ["Uniquement sur votre PC", "<code>settings.json</code> garde vos choix. <code>history.jsonl</code> compte une ligne par pause (heure, type, et si vous l'avez prise, reportée ou ignorée) pour les totaux dans les réglages. <code>events.log</code> note quand une pause commence, attend ou se termine et pourquoi, par exemple le nom de fichier d'une app en plein écran; il reste sous 0,5&nbsp;Mo environ. Votre image de fond est aussi conservée, si vous en choisissez une. La version du Store les garde sous <code>%LOCALAPPDATA%\\Packages\\</code> et sa désinstallation les supprime; la version compilée les garde dans <code>%APPDATA%\\io.github.jordanalbayrak.brightpause\\</code>. Vous pouvez supprimer l'un ou l'autre dossier à tout moment."],
+      ["Microphone", "Avec « Attendre pendant les appels » activé, BrightPause demande à Windows si une autre app enregistre depuis un microphone, pour qu'une pause ne commence pas au milieu d'un appel. Il n'enregistre jamais, n'ouvre jamais et n'écoute jamais le microphone lui-même, et n'apprend rien de l'autre app, sauf qu'elle enregistre."],
+      ["Réseau", "La version du Store ne se connecte à aucun réseau; le Store livre ses mises à jour. La version compilée se connecte à GitHub uniquement pour vérifier les mises à jour, quand vous appuyez sur « Vérifier les mises à jour » ou activez les mises à jour automatiques (désactivées par défaut). Un lien vers une source sur un écran de pause s'ouvre dans votre navigateur quand vous cliquez dessus. Ni compte, ni pub, ni statistiques d'usage, ni rapports de plantage, ni télémétrie."],
+      ["Enfants", "BrightPause ne collecte aucune information personnelle, de personne, y compris des enfants."],
+      ["Modifications et contact", `Les modifications paraissent ici et dans le code source de l'app, où <a href="${HISTORY}">son historique montre chaque version</a>. Des questions ? <a href="${ISSUES}">Ouvrez un ticket sur GitHub</a>.`],
+    ]),
 };

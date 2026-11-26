@@ -301,6 +301,22 @@ a:hover { color: var(--accent-hover); }
 .foot a:hover { color: var(--ink); }
 .foot p { margin: 0 0 8px; }
 
+/* BrightPause privacy policy block on the home page */
+.policy { margin: 72px auto 0; max-width: 60rem; padding: 28px 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); scroll-margin-top: 88px; }
+@media (min-width: 900px) { .policy { margin-top: 112px; padding: 40px 44px; } }
+.policy h3 { font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); letter-spacing: -0.025em; line-height: 1.15; margin: 0; }
+.policy .meta { color: var(--muted); margin: 8px 0 0; font-size: 0.9375rem; }
+.policy-lead { margin: 18px 0 0; font-size: 1.0625rem; }
+.policy-grid { margin-top: 8px; }
+.policy-grid > div { break-inside: avoid; padding-top: 22px; }
+@media (min-width: 760px) { .policy-grid { columns: 2; column-gap: 40px; } }
+.policy h4 { font-size: 1rem; margin: 0 0 6px; letter-spacing: -0.01em; }
+.policy-grid p { color: var(--muted); margin: 0; font-size: 0.9375rem; }
+.policy code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 0.875em;
+  background: var(--bg-2); border: 1px solid var(--line); padding: 1px 5px; border-radius: 6px; overflow-wrap: anywhere;
+}
+
 /* Policy pages */
 .doc { max-width: 44rem; margin: 0 auto; padding: 56px 0 80px; }
 @media (min-width: 900px) { .doc { padding: 88px 0 112px; } }
